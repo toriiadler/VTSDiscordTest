@@ -85,7 +85,9 @@ client.on("messageCreate", async (message) => {
     } else if (message.content.toLowerCase() === "leave") { // disconnects bot
         let connection = getVoiceConnection(message.guildId);
         await connection.disconnect(); 
-    } 
+    } else if (message.content.toLowerCase() === "insert message here") { // user defined hard coded function
+	    //await DefineFunctionHere()
+    }
 });
 
 
