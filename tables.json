@@ -1,0 +1,4 @@
+{
+  "insert DISCORD user id here. typically a string of 18 digits": ["hotkey ID for inactive avatar image here", "hotkey ID for ACTIVE avatar image here", "(OPTIONAL) username to keep track of who's who"],
+  "insert DISCORD user id here. typically a string of 18 digits": ["hotkey ID for inactive avatar image here", "hotkey ID for ACTIVE avatar image here", "(OPTIONAL) username to keep track of who's who"]
+}
