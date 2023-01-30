@@ -1,11 +1,11 @@
 'use strict';
 
 // Require the necessary discord.js and vtubestudio classes
-const { Client, Intents, VoiceChannel } = require('discord.js');
+const { Client, Intents, VoiceChannel } = require('discord.js'); // discordjs
 const { joinVoiceChannel, getVoiceConnection, entersState, VoiceConnectionStatus } = require('@discordjs/voice');
-const { token } = require('./config.json');
-const { WebSocket } = require("ws");
-const { WebSocketBus, ApiClient, Plugin } = require("vtubestudio");
+const { token } = require('./config.json'); // gets the discord bot tokens and stuff. requires manual entry. i've provided a template but removed all sensitive information
+const { WebSocket } = require("ws"); // the websocket plugin
+const { WebSocketBus, ApiClient, Plugin } = require("vtubestudio"); // vtubestudiojs
 
 //websockets for vtubestudio
 const webSocket = new WebSocket("ws://localhost:8001");
@@ -37,12 +37,12 @@ async function vtubestudioconnect() { // defines vtubestudio connection
 
 }
 
-async function togglespeak(userID) { 
+async function togglespeak(userID) { // activates/deactivates each item. one should be toggled on and the other toggled off. scuffed way of doing it, but hey, it was april 2022
     await plugin.apiClient.hotkeyTrigger({ hotkeyID: tables[userID][0] });
     await plugin.apiClient.hotkeyTrigger({ hotkeyID: tables[userID][1] });
 }
 //async function DefineFunctionHere() {
-    // await plugin.apiClient.hotkeyTrigger({ hotkeyID: "" }); //hotkeyID is hardcodable because i am a bad programmer
+    // await plugin.apiClient.hotkeyTrigger({ hotkeyID: "" }); //hotkeyID is hardcodable because i am a bad programmer.
 //}
 
 
@@ -64,13 +64,13 @@ client.on("messageCreate", async (message) => {
         }
         try {
             await entersState(connection, VoiceConnectionStatus.Ready, 20e3);
-            connection.receiver.speaking.on("start", (userId) => {
+            connection.receiver.speaking.on("start", (userId) => { // this is what receives the START of the voice state
                 console.log(`${userId} start`);
                 if (tables.hasOwnProperty(userId)) {
                     togglespeak(userId);
                 }
             });
-            connection.receiver.speaking.on("end", (userId) => {
+            connection.receiver.speaking.on("end", (userId) => { // this is what receives the END of the voice state
                 console.log(`${userId} end`);
                 if (tables.hasOwnProperty(userId)) {
                     togglespeak(userId);
@@ -85,9 +85,10 @@ client.on("messageCreate", async (message) => {
     } else if (message.content.toLowerCase() === "leave") { // disconnects bot
         let connection = getVoiceConnection(message.guildId);
         await connection.disconnect(); 
-    } else if (message.content.toLowerCase() === "insert message here") { // user defined hard coded function
+    } 
+	// else if (message.content.toLowerCase() === "insert message here") { // user defined hard coded function
 	    //await DefineFunctionHere()
-    }
+    //}
 });
 
 
@@ -100,7 +101,7 @@ client.once('ready', () => {
 	client.user.setActivity('peepee poo poo haha', { type: 'WATCHING' });
 });
 
-// Login to Discord with your client's token
+// Login to Discord with your client (of this app)'s token
 client.login(token);
 
 vtubestudioconnect();
