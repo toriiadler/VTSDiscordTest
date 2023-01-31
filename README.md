@@ -10,3 +10,4 @@ index.js: main program that links vts to discord and vice versa
 config.json: discord's authentication
 
 i'm sorry for not making a better documentation for this project, i just made this project for a video i thought would be funny and i didn't think it'd take me 8 months to publish the code
+video: https://youtu.be/XeG7vxKJNDc
